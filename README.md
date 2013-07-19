@@ -1,4 +1,4 @@
-# EM::Synchrony::Dataone::Vin
+# EM::Synchrony::DataoneVin
 
 TODO: Write a gem description
 
