@@ -5,7 +5,7 @@ require 'em-synchrony/dataone-vin/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "em-synchrony-dataone-vin"
-  spec.version       = EM::Synchrony::DataoneVin::VERSION
+  spec.version       = EventMachine::Synchrony::DataoneVin::VERSION
   spec.authors       = ["Scott Nielsen", "Jake Mallory"]
   spec.email         = ["scottnielsen5@gmail.com", "tinomen@gmail.com"]
   spec.description   = %q{A client for the Dataone vindecoding service that runs with EM::Synchrony}
@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "em-synchrony",    "~> 1.0.3"
 
   spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rake", "~> 0.9.6"
 end

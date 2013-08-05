@@ -1,8 +1,8 @@
-require 'em-synchrony/dataone-vin/version'
 require 'json'
 require 'em-http'
 require 'em-synchrony'
 require 'em-synchrony/em-http'
+require 'em-synchrony/dataone-vin/version'
 
 module EventMachine
   module Synchrony
@@ -17,9 +17,10 @@ module EventMachine
       end
 
       def get(vin)
-        EM::HttpRequest.new(request_url).post \
+        JSON::load EM::HttpRequest.new(request_url).post(
           :head => {:content_type => 'application/x-www-form-urlencoded'},
           :body => request_hash(vin)
+        ).response
       end
 
       def request_url

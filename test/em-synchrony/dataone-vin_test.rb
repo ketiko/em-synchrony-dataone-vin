@@ -1,16 +1,20 @@
-require 'minitest/autorun'
-require 'minitest/spec'
-
+require 'test_helper'
 require 'em-synchrony/dataone-vin'
 
 module EventMachine
   module Synchrony
     describe DataoneVin do
+      include TestHelpers
+
+      before do
+        DataoneVin.configure(*DATAONE_CONFIG)
+      end
+
       it 'should work' do
         EM.synchrony do
-          require 'pp'
-          pp JSON::load EM::Synchrony::DataoneVin.get('5TBRT3418YS094830').response
-
+          result = EM::Synchrony::DataoneVin.get('5TBRT3418YS094830')
+          result['query_responses']['Request-Sample'].delete('transaction_id')
+          result.must_equal expected_result
           EM.stop
         end
       end
