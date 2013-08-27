@@ -14,7 +14,7 @@ module EventMachine
         }
 
         FUEL_TYPES = {
-          'B' => 'BIODIESEL',
+          'B' => 'DIESEL',
           'D' => 'DIESEL',
           'F' => 'FFV',
           'G' => 'GAS',
