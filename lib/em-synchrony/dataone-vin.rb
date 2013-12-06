@@ -24,7 +24,7 @@ module EventMachine
       end
 
       def request_url
-        "https://www.dataonesoftware.com/webservices/vindecoder/decode"
+        "https://api.dataonesoftware.com/webservices/vindecoder/decode"
       end
 
       def request_hash(vin)
