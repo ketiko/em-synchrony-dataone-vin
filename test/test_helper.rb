@@ -640,7 +640,9 @@ module TestHelpers
   def out_of_market_result
     {
       "decoder_messages"=> {
-        "service_provider"=>"DataOne Software, Inc.", "decoder_version"=>"7.0.0", "decoder_errors"=>[]
+        "service_provider"=> "DataOne Software, Inc.",
+        "decoder_version"=> "7.0.0",
+        "decoder_errors"=> []
       },
       "query_responses"=> {
         "Request-Sample"=> {
@@ -654,6 +656,20 @@ module TestHelpers
   end
 
   def bad_vin_result
-    {"decoder_messages"=>{"service_provider"=>"DataOne Software, Inc.", "decoder_version"=>"7.0.0", "decoder_errors"=>[]}, "query_responses"=>{"Request-Sample"=>{"transaction_id"=>"D223B3765AF5050ECC805068C8F5CB9B9CB5F89D", "query_error"=>{"error_code"=>"IV", "error_message"=>"Invalid VIN: Not 17 characters"}}}}
+    {
+      "decoder_messages"=> {
+        "service_provider"=> "DataOne Software, Inc.",
+        "decoder_version"=> "7.0.0",
+        "decoder_errors"=>[]
+      },
+      "query_responses"=> {
+        "Request-Sample"=> {
+          "query_error"=> {
+            "error_code"=> "IV",
+            "error_message"=> "Invalid VIN: Not 17 characters"
+          }
+        }
+      }
+    }
   end
 end
