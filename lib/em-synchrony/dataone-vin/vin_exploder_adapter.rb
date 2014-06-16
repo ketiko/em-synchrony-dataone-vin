@@ -67,6 +67,10 @@ module EventMachine
           'production_seq_number' => ['common_data', 'This will always be nil'],
         }
 
+        PASS_ERROR_CODES = [
+          "OM" # out-of-market vehicles
+        ]
+
         def initialize(options)
           client_id, authorization_code = options.values_at(:client_id, :authorization_code)
 
@@ -82,7 +86,10 @@ module EventMachine
         end
 
         def format_response(response, vin)
-          errors = errors(response)
+          passes = detect_passes(response)
+          return {:pass => passes} unless passes.empty?
+
+          errors = detect_errors(response)
           return {:errors => errors} unless errors.empty?
 
           data = response['query_responses']['Request-Sample']
@@ -93,7 +100,14 @@ module EventMachine
             :vendor_result => data
         end
 
-        def errors(response)
+        def detect_passes(response)
+          error_code    = response['query_responses']['Request-Sample']['query_error']['error_code']
+          error_message = response['query_responses']['Request-Sample']['query_error']['error_message']
+
+          PASS_ERROR_CODES.include?(error_code) ? [error_message] : []
+        end
+
+        def detect_errors(response)
           query_error = response['query_responses']['Request-Sample']['query_error']['error_message']
           errors = response['decoder_messages']['decoder_errors']
           errors << query_error unless query_error.empty?
