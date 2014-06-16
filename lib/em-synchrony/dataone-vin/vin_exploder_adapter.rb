@@ -67,6 +67,10 @@ module EventMachine
           'production_seq_number' => ['common_data', 'This will always be nil'],
         }
 
+        PASS_ERROR_CODES = [
+          "OM" # out-of-market vehicles
+        ]
+
         def initialize(options)
           client_id, authorization_code = options.values_at(:client_id, :authorization_code)
 
@@ -82,6 +86,9 @@ module EventMachine
         end
 
         def format_response(response, vin)
+          passes = passes(response)
+          return {:pass => passes} unless passes.empty?
+
           errors = errors(response)
           return {:errors => errors} unless errors.empty?
 
@@ -91,6 +98,13 @@ module EventMachine
             :vin           => vin,
             :vin_key       => vin_key(vin),
             :vendor_result => data
+        end
+
+        def passes(response)
+          error_code    = response['query_responses']['Request-Sample']['query_error']['error_code']
+          error_message = response['query_responses']['Request-Sample']['query_error']['error_message']
+
+          PASS_ERROR_CODES.include?(error_code) ? [error_message] : []
         end
 
         def errors(response)

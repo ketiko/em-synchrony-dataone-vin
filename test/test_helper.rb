@@ -636,4 +636,24 @@ module TestHelpers
                "months"=>"36",
                "miles"=>"36000"}]}]}}}
   end
+
+  def out_of_market_result
+    {
+      "decoder_messages"=> {
+        "service_provider"=>"DataOne Software, Inc.", "decoder_version"=>"7.0.0", "decoder_errors"=>[]
+      },
+      "query_responses"=> {
+        "Request-Sample"=> {
+          "query_error"=> {
+            "error_code"=> "OM",
+            "error_message"=> "This VIN is for an out of market vehicle. Please contact 1-877-GET-VINS for more information on how to activate out of market decoding."
+          }
+        }
+      }
+    }
+  end
+
+  def bad_vin_result
+    {"decoder_messages"=>{"service_provider"=>"DataOne Software, Inc.", "decoder_version"=>"7.0.0", "decoder_errors"=>[]}, "query_responses"=>{"Request-Sample"=>{"transaction_id"=>"D223B3765AF5050ECC805068C8F5CB9B9CB5F89D", "query_error"=>{"error_code"=>"IV", "error_message"=>"Invalid VIN: Not 17 characters"}}}}
+  end
 end
