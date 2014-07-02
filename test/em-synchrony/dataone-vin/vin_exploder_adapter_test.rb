@@ -29,6 +29,7 @@ module EventMachine
               'fuel_type'             => 'GAS',
               'anti-brake_system'     => 'No Data',
               'gvwr_class'            => '2',
+              'tonnage'               => '1/2',
               'transmission-long'     => '4-Speed Automatic',
               'transmission-short'    => '4A',
               'tank'                  => '26',

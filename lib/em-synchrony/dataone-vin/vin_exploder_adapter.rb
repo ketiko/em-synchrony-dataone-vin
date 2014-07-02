@@ -56,6 +56,7 @@ module EventMachine
           'abs_two_wheel'         => ['common_data', 'safety_equipment', 'abs_two_wheel'],
           'abs_four_wheel'        => ['common_data', 'safety_equipment', 'abs_four_wheel'],
           'gvwr_class'            => ['common_data', 'specifications', ['category', 'Measurements of Weight'], 'specifications', ['name', 'Gross Vehicle Weight Rating'], 'value'],
+          'tonnage'               => ['common_data', 'specifications', ['category', 'Measurements of Weight'], 'specifications', ['name', 'Tonnage'], 'value'],
           'vehicle_type'          => ['common_data', 'basic_data', 'vehicle_type'],
           'number_of_cylinders'   => ['styles', 0, 'engines', 0, 'cylinders'],
           'number_of_doors'       => ['common_data', 'basic_data', 'doors'],
