@@ -98,7 +98,8 @@ module EventMachine
             :errors        => [],
             :vin           => vin,
             :vin_key       => vin_key(vin),
-            :vendor_result => data
+            :vendor_result => data,
+            :adapter       => 'dataone'
         end
 
         def detect_passes(response)
