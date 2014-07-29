@@ -69,6 +69,7 @@ module EventMachine
         }
 
         PASS_ERROR_CODES = [
+          "CH",# chassis vehicles
           "OM" # out-of-market vehicles
         ]
 
