@@ -139,7 +139,7 @@ module EventMachine
           data['driveline'] = normalize_driveline data['driveline']
           data['fuel_type'] = normalize_fuel_type data['fuel_type']
           data['vehicle_type'] = data['vehicle_type'].upcase
-          data['has_turbo'] = !!(data['engine_type'] =~ /turbo/i)
+          data['has_turbo'] = [/turbo/i, / TC /, /supercharge/i].any? {|regex| !!(data['engine_type'] =~ regex)}
           data['transmission-short'] = "#{data.delete('gears')}#{data.delete('transmission-type')}"
           data['anti-brake_system'] = normalize_brakes data.delete('abs_two_wheel'), data.delete('abs_four_wheel')
           data['gvwr_class'] = normalize_gvwr_class data['gvwr_class']
