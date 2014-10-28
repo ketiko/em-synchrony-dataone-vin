@@ -40,7 +40,7 @@ module EventMachine
         DATA_PATHS = {
           'year'                  => ['common_data', 'basic_data', 'year'],
           'make'                  => ['common_data', 'basic_data', 'make'],
-          'model'                 => ['common_data', 'basic_data', 'model'],
+          'model'                 => ['styles', 0, 'basic_data', 'model'],
           'trim_level'            => ['common_data', 'basic_data', 'trim'],
           'engine_type'           => ['styles', 0, 'engines', 0, 'name'],
           'engine_displacement'   => ['styles', 0, 'engines', 0, 'displacement'],
