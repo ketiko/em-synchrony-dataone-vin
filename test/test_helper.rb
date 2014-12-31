@@ -234,7 +234,10 @@ module TestHelpers
              "tire_pressure_monitoring_system"=>"",
              "rollover_stability_control"=>""},
            "warranties"=>
-            [{"name"=>"Corrosion", "type"=>"Rust", "months"=>"60", "miles"=>"0"},
+            [{"name"=>"Corrosion",
+              "type"=>"Rust",
+              "months"=>"60",
+              "miles"=>"0"},
              {"name"=>"Roadside Assistance",
               "type"=>"Roadside Assistance",
               "months"=>"0",
@@ -622,7 +625,10 @@ module TestHelpers
               "tire_pressure_monitoring_system"=>"",
               "rollover_stability_control"=>""},
             "warranties"=>
-             [{"name"=>"Corrosion", "type"=>"Rust", "months"=>"60", "miles"=>"0"},
+             [{"name"=>"Corrosion",
+               "type"=>"Rust",
+               "months"=>"60",
+               "miles"=>"0"},
               {"name"=>"Roadside Assistance",
                "type"=>"Roadside Assistance",
                "months"=>"0",

@@ -66,6 +66,7 @@ module EventMachine
           'width'                 => ['common_data', 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Width'], 'value'],
           'height'                => ['common_data', 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Height'], 'value'],
           'production_seq_number' => ['common_data', 'This will always be nil'],
+          'warranties'            => ['common_data', 'warranties']
         }
 
         PASS_ERROR_CODES = [

@@ -44,6 +44,7 @@ module EventMachine
             formatted_result['width'].must_equal '75.2'
             formatted_result['height'].must_equal '70.5'
             formatted_result['production_seq_number'].must_be_nil
+            formatted_result['warranties'].detect { |w| w['type'] == 'Basic' }.wont_be_nil
             formatted_result[:errors].must_be_empty
             formatted_result[:vin].must_equal '1FT7W2BT6BEC91853'
             formatted_result[:vin_key].must_equal '1FT7W2BTBE'
