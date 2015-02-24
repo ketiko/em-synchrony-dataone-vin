@@ -139,7 +139,7 @@ module EventMachine
         def normalize(data)
           data['driveline'] = normalize_driveline data['driveline']
           data['fuel_type'] = normalize_fuel_type data['fuel_type']
-          data['vehicle_type'] = data['vehicle_type'].upcase
+          data['vehicle_type'] = data['vehicle_type'].upcase if data['vehicle_type']
           data['has_turbo'] = [/turbo/i, / TC /, /supercharge/i].any? {|regex| !!(data['engine_type'] =~ regex)}
           data['transmission-short'] = "#{data.delete('gears')}#{data.delete('transmission-type')}"
           data['anti-brake_system'] = normalize_brakes data.delete('abs_two_wheel'), data.delete('abs_four_wheel')
