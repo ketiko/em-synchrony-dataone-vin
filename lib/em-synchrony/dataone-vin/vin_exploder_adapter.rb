@@ -38,35 +38,35 @@ module EventMachine
         }
 
         DATA_PATHS = {
-          'year'                  => ['common_data', 'basic_data', 'year'],
-          'make'                  => ['common_data', 'basic_data', 'make'],
+          'year'                  => ['styles', 0, 'basic_data', 'year'],
+          'make'                  => ['styles', 0, 'basic_data', 'make'],
           'model'                 => ['styles', 0, 'basic_data', 'model'],
-          'trim_level'            => ['common_data', 'basic_data', 'trim'],
+          'trim_level'            => ['styles', 0, 'basic_data', 'trim'],
           'engine_type'           => ['styles', 0, 'engines', 0, 'name'],
           'engine_displacement'   => ['styles', 0, 'engines', 0, 'displacement'],
           'engine_shape'          => ['styles', 0, 'engines', 0, 'block_type'],
-          'body_style'            => ['common_data', 'basic_data', 'body_type'],
-          'manufactured_in'       => ['common_data', 'basic_data', 'country_of_manufacture'],
-          'driveline'             => ['common_data', 'basic_data', 'drive_type'],
+          'body_style'            => ['styles', 0, 'basic_data', 'body_type'],
+          'manufactured_in'       => ['styles', 0, 'basic_data', 'country_of_manufacture'],
+          'driveline'             => ['styles', 0, 'basic_data', 'drive_type'],
           'fuel_type'             => ['styles', 0, 'engines', 0, 'fuel_type'],
           'transmission-long'     => ['styles', 0,'transmissions', 0, 'name'],
           'gears'                 => ['styles', 0,'transmissions', 0, 'gears'],
           'transmission-type'     => ['styles', 0,'transmissions', 0, 'type'],
-          'tank'                  => ['common_data', 'specifications', ['category', 'Fuel Tanks'], 'specifications', ['name', 'Fuel Tank 1 Capacity (Gallons)'], 'value'],
-          'abs_two_wheel'         => ['common_data', 'safety_equipment', 'abs_two_wheel'],
-          'abs_four_wheel'        => ['common_data', 'safety_equipment', 'abs_four_wheel'],
-          'gvwr_class'            => ['common_data', 'specifications', ['category', 'Measurements of Weight'], 'specifications', ['name', 'Gross Vehicle Weight Rating'], 'value'],
-          'tonnage'               => ['common_data', 'specifications', ['category', 'Measurements of Weight'], 'specifications', ['name', 'Tonnage'], 'value'],
-          'vehicle_type'          => ['common_data', 'basic_data', 'vehicle_type'],
+          'tank'                  => ['styles', 0, 'specifications', ['category', 'Fuel Tanks'], 'specifications', ['name', 'Fuel Tank 1 Capacity (Gallons)'], 'value'],
+          'abs_two_wheel'         => ['styles', 0, 'safety_equipment', 'abs_two_wheel'],
+          'abs_four_wheel'        => ['styles', 0, 'safety_equipment', 'abs_four_wheel'],
+          'gvwr_class'            => ['styles', 0, 'specifications', ['category', 'Measurements of Weight'], 'specifications', ['name', 'Gross Vehicle Weight Rating'], 'value'],
+          'tonnage'               => ['styles', 0, 'specifications', ['category', 'Measurements of Weight'], 'specifications', ['name', 'Tonnage'], 'value'],
+          'vehicle_type'          => ['styles', 0, 'basic_data', 'vehicle_type'],
           'number_of_cylinders'   => ['styles', 0, 'engines', 0, 'cylinders'],
-          'number_of_doors'       => ['common_data', 'basic_data', 'doors'],
-          'standard_seating'      => ['common_data', 'specifications', ['category', 'Seating'], 'specifications', ['name', 'Standard Seating'], 'value'],
-          'optional_seating'      => ['common_data', 'specifications', ['category', 'Seating'], 'specifications', ['name', 'Max Seating'], 'value'],
-          'length'                => ['common_data', 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Length'], 'value'],
-          'width'                 => ['common_data', 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Width'], 'value'],
-          'height'                => ['common_data', 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Height'], 'value'],
-          'production_seq_number' => ['common_data', 'This will always be nil'],
-          'warranties'            => ['common_data', 'warranties']
+          'number_of_doors'       => ['styles', 0, 'basic_data', 'doors'],
+          'standard_seating'      => ['styles', 0, 'specifications', ['category', 'Seating'], 'specifications', ['name', 'Standard Seating'], 'value'],
+          'optional_seating'      => ['styles', 0, 'specifications', ['category', 'Seating'], 'specifications', ['name', 'Max Seating'], 'value'],
+          'length'                => ['styles', 0, 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Length'], 'value'],
+          'width'                 => ['styles', 0, 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Width'], 'value'],
+          'height'                => ['styles', 0, 'specifications', ['category', 'Measurements of Size and Shape'], 'specifications', ['name', 'Height'], 'value'],
+          'production_seq_number' => ['styles', 0, 'This will always be nil'],
+          'warranties'            => ['styles', 0, 'warranties']
         }
 
         PASS_ERROR_CODES = [
@@ -96,12 +96,14 @@ module EventMachine
           return {:errors => errors} unless errors.empty?
 
           data = response['query_responses']['Request-Sample']
-          explosion(data).merge \
+          exploded = explosion(data).merge \
             :errors        => [],
             :vin           => vin,
             :vin_key       => vin_key(vin),
             :vendor_result => data,
             :adapter       => 'dataone'
+          exploded["vehicle_type"] = 'COMMERCIAL' if data["common_data"].nil?
+          exploded
         end
 
         def detect_passes(response)
@@ -139,7 +141,7 @@ module EventMachine
         def normalize(data)
           data['driveline'] = normalize_driveline data['driveline']
           data['fuel_type'] = normalize_fuel_type data['fuel_type']
-          data['vehicle_type'] = data['vehicle_type'].upcase if data['vehicle_type']
+          data['vehicle_type'] = data['vehicle_type'].upcase
           data['has_turbo'] = [/turbo/i, / TC /, /supercharge/i].any? {|regex| !!(data['engine_type'] =~ regex)}
           data['transmission-short'] = "#{data.delete('gears')}#{data.delete('transmission-type')}"
           data['anti-brake_system'] = normalize_brakes data.delete('abs_two_wheel'), data.delete('abs_four_wheel')

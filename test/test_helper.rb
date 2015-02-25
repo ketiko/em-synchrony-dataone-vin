@@ -678,4 +678,141 @@ module TestHelpers
       }
     }
   end
+
+  def expected_heavy_duty_result
+    {
+      "decoder_messages"=>
+      {
+        "service_provider"=>"DataOne Software, Inc.",
+        "decoder_version"=>"7.0.0",
+        "decoder_errors"=>[]
+      },
+      "query_responses"=>
+      {
+        "Request-Sample"=>
+        {
+          "transaction_id"=>"5B8F9446C4398BD527992B8C718637EAF80A05E4",
+          "query_error"=>
+          {
+            "error_code"=>"",
+            "error_message"=>""
+          },
+          "styles"=>[
+            {
+              "name"=>"4X4 2dr Regular Cab 140.8-200.8 in. WB",
+              "vehicle_id"=>"670000130",
+              "complete"=>"Y",
+              "basic_data"=>
+              {
+                "market"=>"Medium Duty",
+                "year"=>"2007",
+                "make"=>"Ford",
+                "model"=>"F-550 Super Duty",
+                "trim"=>"",
+                "vehicle_type"=>"Truck",
+                "body_type"=>"Chassis",
+                "body_subtype"=>"Regular Cab",
+                "doors"=>"2",
+                "model_number"=>"",
+                "package_code"=>"",
+                "drive_type"=>"4X4",
+                "brake_system"=>"Hydraulic",
+                "restraint_type"=>"Driver and passenger front airbags",
+                "country_of_manufacture"=>"United States",
+                "plant"=>"Jefferson County, Kentucky"
+              },
+              "pricing"=>
+              {
+                "msrp"=>"",
+                "invoice_price"=>"",
+                "destination_charge"=>"",
+                "gas_guzzler_tax"=>""
+              },
+              "engines"=>[
+                {
+                  "name"=>"Power Stroke 6.0L V8 325hp 560ft. lbs.",
+                  "brand"=>"Power Stroke",
+                  "engine_id"=>"0",
+                  "availability"=>"Installed",
+                  "aspiration"=>"T",
+                  "block_type"=>"V",
+                  "bore"=>"",
+                  "cam_type"=>"OHV",
+                  "compression"=>"",
+                  "cylinders"=>"8",
+                  "displacement"=>"6.0",
+                  "fuel_induction"=>"CRDI",
+                  "fuel_quality"=>"",
+                  "fuel_type"=>"D",
+                  "msrp"=>"",
+                  "invoice_price"=>"",
+                  "marketing_name"=>"",
+                  "max_hp"=>"325-325",
+                  "max_hp_at"=>"",
+                  "max_payload"=>"",
+                  "max_torque"=>"560-560",
+                  "max_torque_at"=>"",
+                  "oil_capacity"=>"",
+                  "order_code"=>"",
+                  "redline"=>"",
+                  "stroke"=>"",
+                  "valve_timing"=>"",
+                  "valves"=>""
+                }],
+                "transmissions"=>[],
+                "specifications"=>[
+                  {
+                    "category"=>"Measurements of Weight",
+                    "specifications"=>[
+                      {
+                        "name"=>"Gross Vehicle Weight Range",
+                        "value"=>"16001-19500"
+                      },
+                      {
+                        "name"=>"Class",
+                        "value"=>"5"
+                      }]
+                  },
+                  {
+                    "category"=>"Measurements of Size and Shape",
+                    "specifications"=>[
+                      {
+                        "name"=>"Wheelbase",
+                        "value"=>"140.8-200.8"
+                      }]
+                  },
+                  {
+                    "category"=>"Truck Specifications",
+                    "specifications"=>[
+                      {
+                        "name"=>"Rear axle",
+                        "value"=>"DRW"
+                      }]
+                  }],
+                  "optional_equipment"=>[],
+                  "colors"=>{
+                    "exterior_colors"=>[],
+                    "interior_colors"=>[],
+                    "roof_colors"=>[]},
+                  "safety_equipment"=>
+                  {
+                    "abs_two_wheel"=>"",
+                    "abs_four_wheel"=>"",
+                    "airbags_front_driver"=>"",
+                    "airbags_front_passenger"=>"",
+                    "airbags_side_impact"=>"",
+                    "airbags_side_curtain"=>"",
+                    "brake_assist"=>"",
+                    "daytime_running_lights"=>"",
+                    "electronic_stability_control"=>"",
+                    "electronic_traction_control"=>"",
+                    "tire_pressure_monitoring_system"=>"",
+                    "rollover_stability_control"=>""
+                  },
+                  "warranties"=>[]
+            }]
+        }
+      }
+    }
+  end
 end
