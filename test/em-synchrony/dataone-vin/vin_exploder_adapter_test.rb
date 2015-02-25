@@ -72,6 +72,46 @@ module EventMachine
             adapter.format_response(out_of_market_result, '2G4WJ582061169230').must_equal \
               :pass=>["This VIN is for an out of market vehicle. Please contact 1-877-GET-VINS for more information on how to activate out of market decoding."]
           end
+
+          describe "when HD vehicle" do
+            it 'should set vehicle_type to COMMERCIAL' do
+              formatted_result = adapter.format_response(expected_heavy_duty_result, '1FDAF57P77EA44816')
+
+              formatted_result['year'].must_equal '2007'
+              formatted_result['make'].must_equal 'Ford'
+              formatted_result['model'].must_equal 'F-550 Super Duty'
+              formatted_result['trim_level'].must_equal ''
+              formatted_result['engine_type'].must_equal 'Power Stroke 6.0L V8 325hp 560ft. lbs.'
+              formatted_result['engine_displacement'].must_equal '6.0'
+              formatted_result['engine_shape'].must_equal 'V'
+              formatted_result['body_style'].must_equal 'Chassis'
+              formatted_result['manufactured_in'].must_equal 'United States'
+              formatted_result['driveline'].must_equal '4WD'
+              formatted_result['fuel_type'].must_equal 'DIESEL'
+              formatted_result['anti-brake_system'].must_equal 'No Data'
+              formatted_result['gvwr_class'].must_equal '1'
+              formatted_result['tonnage'].must_be_nil
+              formatted_result['transmission-long'].must_be_nil
+              formatted_result['transmission-short'].must_equal ''
+              formatted_result['tank'].must_be_nil
+              formatted_result['has_turbo'].must_equal false
+              formatted_result['number_of_cylinders'].must_equal '8'
+              formatted_result['number_of_doors'].must_equal '2'
+              formatted_result['standard_seating'].must_be_nil
+              formatted_result['optional_seating'].must_be_nil
+              formatted_result['length'].must_be_nil
+              formatted_result['width'].must_be_nil
+              formatted_result['height'].must_be_nil
+              formatted_result['production_seq_number'].must_be_nil
+              formatted_result['warranties'].must_be_empty
+              formatted_result[:errors].must_be_empty
+              formatted_result[:vin].must_equal '1FDAF57P77EA44816'
+              formatted_result[:vin_key].must_equal '1FDAF57P7E'
+              formatted_result[:vendor_result].must_equal expected_heavy_duty_result['query_responses']['Request-Sample']
+              formatted_result[:adapter].must_equal 'dataone'
+              formatted_result['vehicle_type'].must_equal 'COMMERCIAL'
+            end
+          end
         end
       end
     end

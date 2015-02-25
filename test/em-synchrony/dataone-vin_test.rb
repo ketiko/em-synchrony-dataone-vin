@@ -29,7 +29,7 @@ module EventMachine::Synchrony
     it "should error" do
       result = {}
       EM.synchrony do
-        result = EM::Synchrony::DataoneVin.get('2G4WJ582061169230')
+        result = EM::Synchrony::DataoneVin.get('2G4WJ58206116923')
         EM.stop
       end
 
